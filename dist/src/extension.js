@@ -1,53 +1,78 @@
 "use strict";
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
+var __createBinding =
+  (this && this.__createBinding) ||
+  (Object.create
+    ? function (o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        var desc = Object.getOwnPropertyDescriptor(m, k);
+        if (
+          !desc ||
+          ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)
+        ) {
+          desc = {
+            enumerable: true,
+            get: function () {
+              return m[k];
+            },
+          };
+        }
+        Object.defineProperty(o, k2, desc);
+      }
+    : function (o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        o[k2] = m[k];
+      });
+var __setModuleDefault =
+  (this && this.__setModuleDefault) ||
+  (Object.create
+    ? function (o, v) {
+        Object.defineProperty(o, "default", { enumerable: true, value: v });
+      }
+    : function (o, v) {
+        o["default"] = v;
+      });
+var __importStar =
+  (this && this.__importStar) ||
+  function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null)
+      for (var k in mod)
+        if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
+          __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
-};
+  };
 Object.defineProperty(exports, "__esModule", { value: true });
 const vscode = __importStar(require("vscode"));
 const fs = __importStar(require("fs"));
 const savefile = __importStar(require("../data/savefile.json"));
 const pokedex = __importStar(require("../data/pokedex.json"));
-var extensionPath = vscode.extensions.getExtension('chungmancheng.pokemon-code-2')?.extensionPath;
+var extensionPath = vscode.extensions.getExtension(
+  "eddonald.pokedex-code"
+)?.extensionPath;
 var items = savefile.items;
 var pokemon_boxes = savefile.pokemon_boxes;
 var shown_pokemon = 0;
 var current_razzberry = false;
 var spawn_rarity = 500; // 1 chance out of spawn_rarity to spawn a Pokemon, 2 chances to spawn items. Each 1/spawn_rarity is a change in text-selection position.
 function save() {
-    fs.writeFile(`${extensionPath}/data/savefile.json`, JSON.stringify({ 'items': items, 'pokemon_boxes': pokemon_boxes }), (err) => {
-        if (err)
-            console.log(err);
-    });
+  fs.writeFile(
+    `${extensionPath}/data/savefile.json`,
+    JSON.stringify({ items: items, pokemon_boxes: pokemon_boxes }),
+    (err) => {
+      if (err) console.log(err);
+    }
+  );
 }
 function show_pokemon() {
-    var pokemon_list = [];
-    for (var key in pokemon_boxes) {
-        pokemon_list.push(pokedex[key].name + ' (x' + pokemon_boxes[key] + ')');
-    }
-    vscode.window.showQuickPick(pokemon_list).then(function () {
-    });
+  var pokemon_list = [];
+  for (var key in pokemon_boxes) {
+    pokemon_list.push(pokedex[key].name + " (x" + pokemon_boxes[key] + ")");
+  }
+  vscode.window.showQuickPick(pokemon_list).then(function () {});
 }
 // function show_inventory(){
 //     var catch_options: Array<number> = [];
@@ -192,26 +217,28 @@ function show_pokemon() {
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 function activate(context) {
-    // extension activates
-    // init_tallgrass();
-    vscode.window.showInformationMessage('Your Pokemon journey has begun!', {});
-    // context.subscriptions.push(
-    // 	vscode.window.registerTreeDataProvider("package-inventory", new NodeInventoryProvider() )
-    // );
-    // listen to "Pokemon Code - Pokedex" command
-    var disposable2 = vscode.commands.registerCommand('extension.showPokemon', function () {
-        show_pokemon();
-    });
-    // listen to "Pokemon Code - Inventory" command
-    // var disposable3 = vscode.commands.registerCommand('extension.showInventory', function () {
-    //     show_inventory();
-    // });
-    context.subscriptions.push(disposable2);
-    // context.subscriptions.push(disposable3);
+  // extension activates
+  // init_tallgrass();
+  vscode.window.showInformationMessage("Your Pokemon journey has begun!", {});
+  // context.subscriptions.push(
+  // 	vscode.window.registerTreeDataProvider("package-inventory", new NodeInventoryProvider() )
+  // );
+  // listen to "Pokemon Code - Pokedex" command
+  var disposable2 = vscode.commands.registerCommand(
+    "extension.showPokemon",
+    function () {
+      show_pokemon();
+    }
+  );
+  // listen to "Pokemon Code - Inventory" command
+  // var disposable3 = vscode.commands.registerCommand('extension.showInventory', function () {
+  //     show_inventory();
+  // });
+  context.subscriptions.push(disposable2);
+  // context.subscriptions.push(disposable3);
 }
 exports.activate = activate;
 // this method is called when your extension is deactivated
-function deactivate() {
-}
+function deactivate() {}
 exports.deactivate = deactivate;
 //# sourceMappingURL=extension.js.map
