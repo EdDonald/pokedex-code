@@ -1,6 +1,7 @@
+# ⚠️ WORK IN PROGRESS ⚠️
 # pokemon-code README
 
-This project is forked from [matthewkremer/pokemon-code](https://github.com/matthewkremer/pokemon-code)
+This project is forked from [ChungmanCheng/pokemon-code](https://github.com/ChungmanCheng/pokemon-code)
 
 You may have heard of the indie game Pokemon GO, but have you heard of Pokemon CODE? Catch Pokemon while coding in VS Code, it's the ultimate productivity killer.
 
@@ -20,19 +21,3 @@ You should be at least the age of 11.
 
 ## Release Notes
 
-### 2.0.0
-
-Pokemon Code will auto start after vscode starts up.
-Added package explorer for viewing pokemons and inventory.
-
-### 0.0.6
-
-Fixed "extension start" issue caused by extensionPath error.
-
-### 0.0.5
-
-Fixed issue that some version may not save file successfully.
-
-### 0.0.4
-
-The Hack-n-Tell version release.
